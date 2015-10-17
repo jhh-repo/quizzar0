@@ -1,0 +1,26 @@
+
+.wrong{
+	color: red;
+}
+
+.right{
+	color: green;
+}
+.boundary{
+
+	border: 1px solid silver; 
+	padding: 10px;
+}
+
+.center{
+	text-align: center;
+	
+}
+
+.height{
+	height: 15%;
+}
+
+.logo{
+	margin-left: 15%;
+}

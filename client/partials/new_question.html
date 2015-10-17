@@ -1,0 +1,32 @@
+<div ng-controller="questionController">
+	<ul class="nav nav-tabs col-md-4 col-md-offset-2">
+	    <li><a href="#/dashboard"> Home</a></li>
+	    <li class="active"><a href="#/new_question">Add a Question</a></li>
+	    <li><button ng-click="logoutUser()" class="btn btn-warning">Log me out</button></li>
+	</ul>
+	<div class="col-md-12"></div>
+	<div class="row">
+		<div class="col-md-4 col-md-offset-2">
+			<h1>Add a new question!</h1>
+	
+			<span>Question: <input type="text" ng-model= "new_question.question_text"></span> 
+			<p></p>
+			<span>Fake Answer 1: <input type="text" ng-model= "new_question.fake_answer_first"></span> 
+			<p></p>
+			<span>Fake Answer 2: <input type="text" ng-model= "new_question.fake_answer_second"></span> 
+			<p></p>
+			<span>Real Answer: <input type="text" ng-model= "new_question.correct_answer"></span> 
+			<div ng-repeat = "error in errQuestion " >
+				<p class="wrong">{{ error.message }}</p>
+			</div>
+			<p class="right">{{ questionResult.message }}</p>
+			
+			<input class="btn btn-success" type="Submit" ng-click="addQuestions()">
+			<form  method="link" action="#/">
+				<input class="btn btn-danger" type="submit" value="Cancel">
+			</form>
+		</div>
+	</div>
+	
+
+</div>

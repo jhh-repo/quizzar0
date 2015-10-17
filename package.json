@@ -1,0 +1,19 @@
+{
+  "name": "blackbelt_test_2",
+  "private": true,
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "angular": "^1.4.7",
+    "angular-local-storage": "^0.2.2",
+    "angular-ui-bootstrap": "^0.13.4",
+    "bcryptjs": "^2.2.2",
+    "bootstrap": "*",
+    "body-parser": "*",
+    "email-validator": "^1.0.3",
+    "express": "*",
+    "mongoose": "*",
+    "mongoose-simple-random": "^0.3.3"
+  }
+}

@@ -1,0 +1,46 @@
+
+
+<div ng-controller="userController">
+	<div class="container-fluid">
+		<alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)"> {{alert.msg}} </alert>	
+		<div class="row">
+
+			<img class="logo" src="../config/coollogo_com-50666908.png">
+		</div>
+		<div class="row">
+
+			<div class="col-md-4 col-md-offset-2 boundary">
+				<div ng-repeat= "error in errReg"> 
+					<p class="wrong" ng-bind="error.message"></p>
+				</div>
+				<p class="right" ng-bind="regResult.message"></p>
+				<h3>Registration</h3>
+				
+				Nickname: <input type="text" ng-model="registration.user_name">
+				<p></p>
+				Email: <input type="text" ng-model="registration.email">
+				<p></p>
+				Password: <input type="password" ng-model="registration.password">
+				<p></p>
+				Repeat Password: <input type="password" ng-model="registration.password_repeat">
+				<p></p>	
+				<input class="btn btn-success" type="submit" value="Register" ng-click="regUser()">
+
+				
+			</div>
+			<div class="col-md-4 boundary">
+				<div ng-repeat= "err in errLogin"> 
+					<p class="wrong" ng-bind="err.message"></p>
+				</div>
+				<p class="wrong" ng-bind="errInd.message"></p>
+				<h3>Login</h3>
+				Nickname: <input type="text" ng-model="login.user_name">
+				<p></p>
+				Password: <input type="password" ng-model="login.password">
+				<p></p>	
+				<input class="btn btn-primary" type="submit" value="Login" ng-click="loginUser()">
+			</div>
+		</div>
+			
+	</div>
+</div>

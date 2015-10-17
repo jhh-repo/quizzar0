@@ -1,0 +1,62 @@
+<div ng-controller="questionController">
+	
+	<h1 class="col-md-offset-1"> Here's your test {{ user.user_name }} !</h1>	
+		<div class="row">
+			<div class="col-md-offset-2">
+				<h4 ng-bind="all_questions.questions[0].question_text"></h4>
+				<label>
+					<input type="radio" ng-model="answers.first" value="{{  all_questions.questions[0].first }}">{{  all_questions.questions[0].first }}
+				</label>
+				<p></p>
+				<label>
+					<input type="radio" ng-model="answers.first" value="{{  all_questions.questions[0].second }}" >{{  all_questions.questions[0].second }}
+				</label>
+				<p></p>
+				<label>
+					<input type="radio" ng-model="answers.first" value="{{ all_questions.questions[0].third }}" >{{  all_questions.questions[0].third }}
+				</label>
+				<p></p>
+
+			</div>
+			<div class="col-md-offset-2">
+				<h4 ng-bind="all_questions.questions[1].question_text"></h4>
+				<label>
+					<input type="radio" ng-model="answers.second" value="{{  all_questions.questions[1].first }}">{{  all_questions.questions[1].first }}
+				</label>
+				<p></p>
+				<label>
+					<input type="radio" ng-model="answers.second" value="{{  all_questions.questions[1].second }}" >{{  all_questions.questions[1].second }}
+				</label>
+				<p></p>
+				<label>
+					<input type="radio" ng-model="answers.second" value="{{ all_questions.questions[1].third }}" >{{  all_questions.questions[1].third }}
+				</label>
+				<p></p>
+			</div>
+			
+			<div class="col-md-offset-2">	
+				<h4 ng-bind="all_questions.questions[2].question_text"></h4>
+				<label>
+					<input type="radio" ng-model="answers.third" value="{{  all_questions.questions[2].first }}">{{  all_questions.questions[2].first }}
+				</label>
+				<p></p>
+				<label>
+					<input type="radio" ng-model="answers.third" value="{{  all_questions.questions[2].second }}" >{{  all_questions.questions[2].second }}
+				</label>
+				<p></p>
+				<label>
+					<input type="radio" ng-model="answers.third" value="{{ all_questions.questions[2].third }}" >{{ all_questions.questions[2].third }}
+				</label>
+				<p></p>
+				<p class= "wrong">{{ errScore.message }}</p>  	
+			</div>			
+			
+		</div>
+	
+	 <div class="col-md-offset-2">
+	 	<input class="btn btn-success" type="submit" ng-click="scoreUser()">
+		<a class="btn btn-warning" href="#/">Quit</a>
+	 </div>
+	
+	
+</div>

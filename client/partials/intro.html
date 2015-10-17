@@ -1,0 +1,48 @@
+
+
+<div ng-controller='userController'>
+	
+	<div class="row">	
+		<ul class="nav nav-tabs col-md-4 col-md-offset-2">
+		    <li class="active"><a href="#/dashboard"> Home</a></li>
+		    <li><a href="#/new_question">Add a Question</a></li>
+		    <li><button ng-click="logoutUser()" class="btn btn-warning">Log me out</button></li>
+
+		</ul>
+	
+	</div>	
+	<div class="row">
+		<alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)"> {{alert.msg}} </alert>	
+		<img class="logo" src="../config/coollogo_com-50666908.png">
+		<div class="col-md-12">
+		<button class="btn btn-success btn-lg col-md-offset-2"><a href="#/test">TEST YOURSELF</a></button>
+		<div class="col-md-12">
+		</div>
+		<div class="col-md-4 col-md-offset-2">
+			<h1>Welcome {{ user.user_name }}!</h1>
+			<input type="text" ng-model="filter_name">
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Name</th>
+						<th>Score</th>
+						<th>Percentage</th>
+						<th>Date</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="score in all_scores | filter: filter_name">
+						<td>{{ score.user_name}}</td>
+						<td>{{ score.score}}</td>
+						<td>{{ score.percentage}}</td>
+						<td>{{ score.date | date:format:" MM dddd" }}</td>
+					</tr>
+				</tbody>
+			</table>
+			<uib-pagination total-items="bigTotalItems" ng-model="bigCurrentPage" max-size="maxSize" class="pagination-sm" boundary-links="true"></uib-pagination>
+		</div>
+		
+
+	</div>
+	
+</div>
