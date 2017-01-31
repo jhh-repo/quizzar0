@@ -9,25 +9,28 @@ Features:
 + users scored on their performance, and put on scoreboard.
 + User accounts encrypted with Bcrypt.
 
-
+Cons:
++ hardcoded for three questions only
++ correct answer can be found out by a clever hacker
++ sparse features and front-end
 
 built with:
 
 Node js
 
-Front End
-  HTML
-  CSS
-  Javascript
-  Angular + Angular UI
+Front End -
+  HTML,
+  CSS,
+  Javascript,
+  Angular + Angular UI,
   Bootstrap
 
-Backend
+Backend -
 
-  Node js
+  Node js,
   Express
 
-Database
+Database -
   MongoDB 
 
 
