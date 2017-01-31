@@ -4,18 +4,18 @@ myApp.controller("userController", function($scope, $log, $route, $timeout, $loc
 	
 	//collects bootstrap alerts from logging in and scoring
 	$scope.alerts = [];
-	//if gets message from local service on result of the quiz and puts into bootstrap alert 
+	//anounces the score from the quiz
 	if(localStorageService.get("scores")){
 		console.log("doing it?", $scope.alerts)
 		$scope.alerts.push({type:"success", msg: localStorageService.get("scores")})
 		localStorageService.remove("scores")
 	}
-	//
+	//alert for successful login
 	if(localStorageService.get("userloggedin")){
 		$scope.alerts.push({type:"success", msg: "Login Successful"});
 		localStorageService.remove("userloggedin")
 	}
-
+	//$scope for user registration, allows user to register
 	$scope.regUser = function(){ 
 		userFactory.regUsers($scope.registration, function(result){
 			if(result){
