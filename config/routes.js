@@ -1,4 +1,4 @@
-//all the backend controllers
+//routes for all the backend controllers are here
 var questions = require("../server/controllers/questions.js");
 var scores = require("../server/controllers/scores.js");
 var users = require("../server/controllers/users.js");
