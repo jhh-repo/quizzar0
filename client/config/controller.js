@@ -20,12 +20,13 @@ myApp.controller("userController", function($scope, $log, $route, $timeout, $loc
 		userFactory.regUsers($scope.registration, function(result){
 			if(result){
 
-				
+				// empties registration if result returns as error
 				if(Array.isArray(result) == true){
 					$scope.regResult = "";
 					$scope.errReg = result
 					$scope.registration = "";
 				}
+				// empties regustration fi registration came through
 				else {
 					$scope.errReg = "";
 					$scope.regResult = result;
@@ -57,8 +58,11 @@ myApp.controller("userController", function($scope, $log, $route, $timeout, $loc
 	}
 
 
-	
+	// quirk in the js in general: function needs to be called 
+	// before the function is defined in order for it 
+	// to update properly in the front end
 	getUser();
+	// get user data
 	function getUser(){
 		
 			if(localStorageService.get("user")){
@@ -77,7 +81,7 @@ myApp.controller("userController", function($scope, $log, $route, $timeout, $loc
 
 		
 	}
-	
+	// logs out user
 	$scope.logoutUser = function(){
 		if($scope.user.loggedin === true) {
 			userFactory.logoutUsers($scope.user, function(data){
@@ -93,7 +97,7 @@ myApp.controller("userController", function($scope, $log, $route, $timeout, $loc
 	
 
 	updateScores();
-	
+	//
 	function updateScores() {
 		userFactory.showScore(function(data){
 			$scope.all_scores = data;
