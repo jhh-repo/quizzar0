@@ -18,14 +18,14 @@ module.exports = (function(app) {
 			repeated = req.body.password_repeat;
 			//error array for collecting error messages
 			errors = [];
-			
+
 			//error messages for each instance of validation error
 			//no nickname
 			if(!nickname){
 				errors.push({message: "You need a nickname"})
-			} 
+			}
 			//nickname needs to be certain length
-			if(nickname){ 
+			if(nickname){
 				if (nickname.length <3 || nickname.length > 16) errors.push({message: "Your nickname needs to be between 3 and 16 characters"});
 			}
 			//nickname needs to be alphanumeric and characters - and _
@@ -40,7 +40,7 @@ module.exports = (function(app) {
 			emailVal = validator.validate(req.body.email);
 			if(email && emailVal === false){
 				errors.push( { message: "Email not formatted correctly ex. example@example.com" }) ;
-				
+
 			}
 			//needs password
 			if(!password){
@@ -72,7 +72,7 @@ module.exports = (function(app) {
 			else {
 				//find the user by nickname from req.body
 				User.find({user_name: nickname}, function(err, data){
-					
+
 					var dataLength = data.length;
 
 					//returns to frontend with message and it will invalidate attempt to create redundant ids
@@ -127,7 +127,7 @@ module.exports = (function(app) {
 							}
 						})
 					}
-				
+
 				})
 			}
 		},
@@ -150,43 +150,43 @@ module.exports = (function(app) {
 			else {
 				//find the user's name in the db
 				User.find({user_name: req.body.user_name}, function(err, data){
-					
+
 					//if nothing found return error message to front end that no username was found
 					if(data.length === 0){
 						res.json({message: "no user by that user name"});
 					}
-					else 
+					else
 					{	//if user is already logged in return error message and would prevent a second login through same username and returns message to front end
 						if(data.loggedin === true){
-						
+
 							res.json({	message: "This user is already logged in"})
 						}
 						else{
-							 
+
 							username = data[0].user_name;
 							id = data[0]._id;
-							
+
 							passwordCandidate = req.body.password;
 							//compare passwords through bcrypt
 							bcrypt.compare(passwordCandidate, data[0].password, function(err, match){
 								//console log error mesage
 								if(err) console.log("error in the password confirmation", err)
-								//if return false return message saying it's the wrong password	
+								//if return false return message saying it's the wrong password
 								if(match=== false){
 									res.json({message: "wrong password"})
 								}
-								//if there is a match then update the logged in variable to true and return userdata to front end 
+								//if there is a match then update the logged in variable to true and return userdata to front end
 								if(match === true){
-								
+
 									User.update({user_name: req.body.user_name}, {loggedin: true}, function(err, data){
-										
+
 										res.json({ _id: id, user_name: username, loggedin: match });
 									})
 								}
 
 							})
 						}
-						
+
 					}
 				})
 			}
@@ -199,23 +199,23 @@ module.exports = (function(app) {
 				found_user = data.length;
 				//if no user found return error message
 				if(!found_user){
-					
+
 					res.json(err);
 				}
 				//if user found update user loggedin as false and send back data
-				else 
+				else
 				{
 					User.update({user_name: req.body.user_name}, {loggedin: false}, function(err,data){
 						res.json(data);
 
-					})	
+					})
 				}
 			})
 
 		}
-		
-		
-	}	
 
-	
+
+	}
+
+
 })();

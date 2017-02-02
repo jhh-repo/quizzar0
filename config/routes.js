@@ -6,7 +6,7 @@ var users = require("../server/controllers/users.js");
 module.exports = function(app){
 	//register
 	app.post('/register', function(req,res){
-		
+
 		users.register(req,res);
 	})
 	//login

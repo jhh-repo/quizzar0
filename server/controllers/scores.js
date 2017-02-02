@@ -33,9 +33,9 @@ module.exports = (function(app) {
 				//pace into scorecard object
 				scorecard = {score: counter, percentage: percentage, userid: userdata._id, user_name: userdata.user_name }
 				console.log("userdata", userdata);
-				//find user who took the ttest 
+				//find user who took the ttest
 				User.findOne({_id: userdata._id},function(err, user){
-								
+
 					//create new score
 					var score = new Score(scorecard);
 					//add new date
@@ -46,30 +46,29 @@ module.exports = (function(app) {
 					score.save({}, function(err,result){
 						//then save user
 						user.save({}, function(err,result){
-							//if error console log error in back end 
+							//if error console log error in back end
 							if(err) console.log("there was error in adding data");
 							else {
-								//if successful send scorecard to front end 
+								//if successful send scorecard to front end
 								console.log(result);
 								res.json(scorecard);
 							}
 						})
-						
+
 					});
 				});
 			}
-			
+
 		},
-		
+
 		show: function(req, res) {
 			//bring back all score to frontend arranged by percentage
 			Score.find({}).sort({percentage: 'desc'}).exec(function(err, data){
 				if(err) console.log(err);
 				else res.json(data);
-				
+
 			})
 		}
 
 	}
 })();
-

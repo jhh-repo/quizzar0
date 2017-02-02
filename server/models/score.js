@@ -5,7 +5,7 @@ scoreSchema = new mongoose.Schema({
 	_user: {type: Schema.ObjectId, ref: "User"},
 	user_name: String,
 	score: Number,
-	percentage: Number, 
+	percentage: Number,
 	date: Date
 })
 //creates model with name score

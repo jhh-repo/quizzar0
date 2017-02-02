@@ -1,17 +1,19 @@
 //front end factories
 myApp.factory("userFactory", function($http){
+	//initialize factory
 	factory = {};
-	
-	
 
 
+
+	//factory registers user
 	factory.regUsers= function(user, callback){
-		console.log(user);
+		//http sends user data from registration from view
+		// registration data returns and sent to callback
 		$http.post("/register",user).success(function(feedback){
 			callback(feedback);
 		})
 	}
-
+//sends login data to backend and returns result
 	factory.loginUsers= function(user, callback){
 		$http.post("/login", user).success(function(result){
 			console.log("logging in")
@@ -24,15 +26,15 @@ myApp.factory("userFactory", function($http){
 			callback(result);
 		})
 	}
-	
 
-	
+
+
 	factory.addScores = function(score, callback){
 		$http.post("/score", score).success(function(result){
 			console.log("score successfully added");
 			callback(result);
 		})
-		
+
 	}
 
 	factory.showScore = function(callback){
@@ -47,18 +49,18 @@ myApp.factory("userFactory", function($http){
 
 myApp.factory("questionFactory", function($http){
 	factory = {};
-	
-	
+
+
 	factory.showQuestions = function(callback){
 		$http.get("/test/questions").success(function(result){
 			console.log(result);
 			callback(result);
 		});
-		
+
 	}
 
 	factory.addQuestions = function(question, callback){
-		
+
 		$http.post('addquestion',question).success(function(result){
 			console.log("successfully added a quesiton");
 			callback(result);

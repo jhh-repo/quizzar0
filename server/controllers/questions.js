@@ -11,7 +11,7 @@ module.exports = (function(app) {
 			if(!req.body.question_text){
 				errors.push({message: "Please enter the text for questions"});
 
-			} 
+			}
 			//question needs to be longer than 15 characters
 			if(req.body.question_text && req.body.question_text.length < 15){
 				errors.push({message: "Question should be longer than 15 characters."})
@@ -33,7 +33,7 @@ module.exports = (function(app) {
 					else res.json({message: "Question added"});
 				})
 			}
-			
+
 
 		},
 
@@ -41,31 +41,46 @@ module.exports = (function(app) {
 		show: function(req,res) {
 			//find 3 random questions from the database using mongoose simple random
 			Question.findRandom({}, {}, {limit: 3}, function(err, data){
+				//send back if there is error
 				if(err) console.log(err);
 				else {
 					//make array for modified data
 					var modData = [];
 					//make shuffler
 					var shuffler = [];
-					//shuffler randomizes order of answers
-					for(i=0; i<3; i++){
-						//first push answers to shuffler
-						shuffler.push(data[i].fake_answer_first);
-						shuffler.push(data[i].fake_answer_second);
-						shuffler.push(data[i].correct_answer);
-						var temp = 0;
-						for(j=0;j<3;j++){
-							//change their order
-							var rand = Math.floor(Math.random()*3);
-							temp = shuffler[j];
-							shuffler[j] = shuffler[rand];
-							shuffler[rand] = temp;
+					//if data has three questions or more shuffle the answers in the questions
+					if(data.length >= 3){
+						//shuffler randomizes order of answers
 
-						}
-						//rename moddata's answer choices as 
-						modData.push({question_text: data[i].question_text, first: shuffler[0], second: shuffler[1], third: shuffler[2]})
-						shuffler = [];
+						for(i=0; i<3; i++){
+							//first push answers to shuffler
+							shuffler.push(data[i].fake_answer_first);
+							shuffler.push(data[i].fake_answer_second);
+							shuffler.push(data[i].correct_answer);
+							var temp = 0;
+							for(j=0;j<3;j++){
+								//change their order
+								var rand = Math.floor(Math.random()*3);
+								temp = shuffler[j];
+								shuffler[j] = shuffler[rand];
+								shuffler[rand] = temp;
+
+							}
+							//rename moddata's answer choices to stop attempt to find out answer through console
+							modData.push({question_text: data[i].question_text, first: shuffler[0], second: shuffler[1], third: shuffler[2]})
+							shuffler = [];
 					}
+					// if there are less than three questions ask for more questions to be added to start the quiz
+					else
+					{
+						res.json({message:"More questions need ot be added"})
+					}
+
+
+
+					}
+
+
 					//make empty object allData to contain reference with answers and modData with the modified questions
 					allData = {};
 					allData.reference = data;
